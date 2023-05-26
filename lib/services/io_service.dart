@@ -54,6 +54,10 @@ class IOService {
     } while (test);
     return result;
   }
+
+  void clr() {
+    print("\x1B[2J\x1B[0;0H");
+  }
 }
 
 Taymer ty = Taymer();
@@ -61,8 +65,22 @@ Taymer ty = Taymer();
 class Taymer {
   void taymer(String text, int seconds) {
     for (int i = seconds; i > 0; i--) {
+      io.clr();
       print("$text. $i...");
       sleep(Duration(seconds: 1));
     }
+  }
+}
+
+class Center {
+  String text;
+  Center({required this.text}) {
+    _printCenter();
+  }
+
+  void _printCenter() {
+    final int width = stdout.terminalColumns;
+    String paddedText = text.padLeft((width + text.length) ~/ 2);
+    stdout.writeln(paddedText);
   }
 }
