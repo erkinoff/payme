@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:math';
-
 import '../services/io_service.dart';
 
 class Card {
@@ -23,4 +23,27 @@ class Card {
       print("Karta muvaffaqiyatli qo'shildi!");
     }
   }
+
+  Map<String, Object?> toMap() {
+    return <String, Object?>{
+      'cardNumber': cardNumber,
+      'validityYear': validityYear,
+      'validityMonth': validityMonth,
+      'registeredPhoneNumber': registeredPhoneNumber,
+    };
+  }
+
+  factory Card.fromMap(Map<String, Object?> map) {
+    return Card(
+      cardNumber: map['cardNumber'] as int,
+      validityYear: map['validityYear'] as int,
+      validityMonth: map['validityMonth'] as int,
+      registeredPhoneNumber: map['registeredPhoneNumber'] as int,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Card.fromJson(String source) =>
+      Card.fromMap(json.decode(source) as Map<String, Object?>);
 }
