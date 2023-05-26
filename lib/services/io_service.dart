@@ -3,6 +3,8 @@ import 'dart:io';
 IOService io = IOService();
 
 class IOService {
+  int half = stdout.terminalColumns ~/ 2;
+
   void _console(String text) {
     stdout.write(text);
   }
@@ -81,6 +83,19 @@ class Center {
   void _printCenter() {
     final int width = stdout.terminalColumns;
     String paddedText = text.padLeft((width + text.length) ~/ 2);
+    stdout.writeln(paddedText);
+  }
+}
+
+class OneFourth {
+  String text;
+  OneFourth({required this.text}) {
+    _printOneFourth();
+  }
+
+  void _printOneFourth() {
+    final int width = stdout.terminalColumns;
+    String paddedText = text.padLeft((width + text.length) ~/ 4);
     stdout.writeln(paddedText);
   }
 }
