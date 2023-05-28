@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:payme/services/io_service.dart';
-
+import '../services/io_service.dart';
 import 'card_model.dart';
 
 ///User saqlash uchun class
