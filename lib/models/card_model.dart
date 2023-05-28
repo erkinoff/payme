@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
-
 import '../services/io_service.dart';
 
+///Card class Userni ichiga beriladi;
 class Card {
   String name;
   int cardNumber;
   int validityYear;
   int validityMonth;
   int registeredPhoneNumber;
-  bool verified;
+  bool _verified;
 
   Card({
     required this.name,
@@ -17,8 +17,9 @@ class Card {
     required this.validityYear,
     required this.validityMonth,
     required this.registeredPhoneNumber,
-  }) : verified = false;
+  }) : _verified = false;
 
+  ///Kartani tasdiqlash uchun
   void verify() {
     int randNumber = Random().nextInt(900000) + 100000;
     int unverifiedCode = io.inputNumber(
@@ -27,10 +28,14 @@ class Card {
       throw UnsupportedError("Kod noto'g'ri kiritildi! Qayta urining...");
     } else {
       print("Karta muvaffaqiyatli qo'shildi!");
-      verified = true;
+      _verified = true;
     }
   }
 
+  bool get verified => _verified;
+
+  ///Databasega qo'shiladigan ma'lumotlar Map ko'rinishida bo'ladi
+  ///Shuning uchun Cardni Mapga o'girib olish kerak
   Map<String, Object?> toMap() {
     return <String, Object?>{
       'name': name,
@@ -41,6 +46,7 @@ class Card {
     };
   }
 
+  ///Databasedagi ma'lumotni o'qib olish uchun
   factory Card.fromMap(Map<String, Object?> map) {
     return Card(
       name: map['name'] as String,
@@ -56,6 +62,7 @@ class Card {
   factory Card.fromJson(String source) =>
       Card.fromMap(json.decode(source) as Map<String, Object?>);
 
+  ///Ekranga takoy chiroyli chiqarish uchun
   @override
   String toString() {
     return "${"".padLeft(io.half, "-")} \n"
@@ -65,4 +72,20 @@ class Card {
         "| ${"Registered Phone Number: $registeredPhoneNumber".padRight(io.half - 3)}|\n"
         "${"".padLeft(io.half, "-")} \n";
   }
+}
+
+void main(List<String> args) {
+  Card card = Card(
+    name: "name",
+    cardNumber: 12,
+    validityYear: 12,
+    validityMonth: 12,
+    registeredPhoneNumber: 1212,
+  );
+
+  print(card.verified);
+
+  print(card);
+  card.verify();
+  print(card.verified);
 }

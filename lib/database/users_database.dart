@@ -5,7 +5,9 @@ DataBase db = DataBase();
 ///Users ma'lumotlarini saqlaydigan class
 class DataBase {
   //Data saqlanadigan Map
-  Map<int, Map<String, Object?>> dataBase = {};
+  Map<int, Map<String, Object?>> dataBase = {
+    993041155: {},
+  };
 
   //* CRUD -> Create, Read, Update, Delete
 

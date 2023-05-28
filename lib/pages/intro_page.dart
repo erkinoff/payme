@@ -11,9 +11,9 @@ class IntroPage extends Builder {
     if (phoneNumber == 0) {
       return;
     } else if (db.isInDataBase(phoneNumber)) {
-      print("Databaseda bor");
+      //TODO: Databaseda bor va undan parol so'raladi
     } else {
-      print("Databaseda yo'q");
+      //TODO: Databaseda yo'q va SignUP qilishi kerak
     }
   }
 }
