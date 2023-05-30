@@ -73,19 +73,3 @@ class Card {
         "${"".padLeft(io.half, "-")} \n";
   }
 }
-
-void main(List<String> args) {
-  Card card = Card(
-    name: "name",
-    cardNumber: 12,
-    validityYear: 12,
-    validityMonth: 12,
-    registeredPhoneNumber: 1212,
-  );
-
-  print(card.verified);
-
-  print(card);
-  card.verify();
-  print(card.verified);
-}

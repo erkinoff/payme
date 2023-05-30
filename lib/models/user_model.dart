@@ -86,8 +86,8 @@ class User {
       phoneNumber: map['phoneNumber'] as int,
       password: map['password'] as String,
       cards: List<Card>.from(
-        (map['cards'] as List<int>).map<Card>(
-          (x) => Card.fromMap(x as Map<String, Object?>),
+        (map['cards'] as List<Map<String, Object?>>).map<Card>(
+          (x) => Card.fromMap(x),
         ),
       ),
     );

@@ -1,5 +1,7 @@
 import '../database/users_database.dart';
 import '../services/io_service.dart';
+import 'auth/sign_in.dart';
+import 'auth/sign_up.dart';
 import 'builder.dart';
 
 class IntroPage extends Builder {
@@ -7,17 +9,14 @@ class IntroPage extends Builder {
   void builder() {
     super.builder();
     Center(text: "| Intro Page |");
-    int phoneNumber = io.inputNumber("Raqamingizni kiriting(0 => Chiqish): ");
+    int phoneNumber = io.inputNumber("Raqamingizni kiriting(Chiqish -> 0): ");
+
     if (phoneNumber == 0) {
       return;
     } else if (db.isInDataBase(phoneNumber)) {
-      //TODO: Databaseda bor va undan parol so'raladi
+      SignIn(phoneNumber);
     } else {
-      //TODO: Databaseda yo'q va SignUP qilishi kerak
+      SignUp(phoneNumber);
     }
   }
-}
-
-void main(List<String> args) {
-  IntroPage();
 }

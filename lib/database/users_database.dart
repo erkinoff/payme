@@ -6,8 +6,8 @@ DataBase db = DataBase();
 class DataBase {
   //Data saqlanadigan Map
   Map<int, Map<String, Object?>> dataBase = {
-    993041155: {},
-  };
+    993041155: User(phoneNumber: 993041155, password: "123456").toMap(),
+  }; //fake database
 
   //* CRUD -> Create, Read, Update, Delete
 
@@ -29,11 +29,8 @@ class DataBase {
   }
 
   ///Read -> databasedan user olish
-  User? readData(int phoneNumber) {
-    if (dataBase[phoneNumber] != null) {
-      final data = dataBase[phoneNumber]!;
-      return User.fromMap(data);
-    }
-    return null;
+  User readData(int phoneNumber) {
+    final data = dataBase[phoneNumber]!;
+    return User.fromMap(data);
   }
 }

@@ -29,31 +29,33 @@ class IOService {
 
   String setPassword(String text) {
     String result = "";
-    bool test;
+    bool exit;
     do {
-      test = false;
+      exit = false;
       result = inputText(text);
+      if (result == "0") return "0"; // Chiqish
+      io.clr(); //Avvalgi barcha yozishmalarni o'chirish
       if (result.length < 8) {
         print("Parol uzunligi 8 ga teng yoki undan uzun bo'lishi kerak...");
-        test = true;
+        exit = true;
       }
       if (!result.contains(RegExp(r"[A-Z]"))) {
         print("Parolda kamida 1 ta katta harf bo'lishi kerak!");
-        test = true;
+        exit = true;
       }
       if (!result.contains(RegExp(r"[a-z]"))) {
         print("Parolda kamida 1 ta kichik harf bo'lishi kerak!");
-        test = true;
+        exit = true;
       }
       if (!result.contains(RegExp(r"[\d]"))) {
         print("Parolda kamida 1 ta raqam bo'lishi kerak!");
-        test = true;
+        exit = true;
       }
       if (!result.contains(RegExp(r"[^A-z\d]"))) {
         print("Parolda kamida 1 ta maxsus belgi bo'lishi kerak!");
-        test = true;
+        exit = true;
       }
-    } while (test);
+    } while (exit);
     return result;
   }
 
