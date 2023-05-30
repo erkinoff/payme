@@ -6,13 +6,15 @@ import 'card_model.dart';
 class User {
   int phoneNumber;
   String password;
-  List<Card> cards;
+  List<Card> cards = [];
 
   User({
     required this.phoneNumber,
     required this.password,
-    List<Card>? cards,
-  }) : cards = [];
+    List<Card>? userCards,
+  }) {
+    cards = userCards ?? [];
+  }
 
   ///Card qo'shish
   void addCard(Card card) {
@@ -54,7 +56,7 @@ class User {
   List<Card> searchCard(String text) {
     List<Card> result = [];
     for (var card in cards) {
-      if (card.name.contains(text) ||
+      if (card.name.toLowerCase().contains(text.toLowerCase()) ||
           card.cardNumber.toString().contains(text) ||
           card.registeredPhoneNumber.toString().contains(text)) {
         result.add(card);
@@ -64,11 +66,16 @@ class User {
   }
 
   ///Barcha Cardlar ro'yhati
-  void readAllCards() {
+  bool readAllCards() {
+    if (cards.isEmpty) {
+      print("Hali birorta ham karta yo'q!");
+      return true;
+    }
     for (int i = 0; i < cards.length; i++) {
       OneFourth(text: "${i + 1}");
       print(cards[i]);
     }
+    return false;
   }
 
   ///Databasega saqlash uchun
@@ -76,7 +83,7 @@ class User {
     return <String, Object?>{
       'phoneNumber': phoneNumber,
       'password': password,
-      'cards': cards.map((x) => x.toMap()).toList(),
+      'userCards': cards.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -85,8 +92,8 @@ class User {
     return User(
       phoneNumber: map['phoneNumber'] as int,
       password: map['password'] as String,
-      cards: List<Card>.from(
-        (map['cards'] as List<Map<String, Object?>>).map<Card>(
+      userCards: List<Card>.from(
+        (map['userCards'] as List<Map<String, Object?>>).map<Card>(
           (x) => Card.fromMap(x),
         ),
       ),
