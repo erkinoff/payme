@@ -1,5 +1,6 @@
 import 'package:payme/database/users_database.dart';
 import 'package:payme/pages/intro_page.dart';
+import 'package:payme/pages/menu/menu_page.dart';
 import 'package:payme/services/io_service.dart';
 
 class SignIn {
@@ -16,7 +17,7 @@ class SignIn {
       IntroPage(); //Raqam so'rashga qaytadi
     } else if (password == db.readData(phoneNumber).password) {
       print("Muvaffaqiyatli kirildi!");
-      //TODO: Menu() ga o'tish
+      Menu(db.readData(phoneNumber));
     } else {
       print("Parol xato!");
       String commmand = io.inputText("1. Qayta urinish\n"

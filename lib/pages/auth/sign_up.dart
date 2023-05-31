@@ -1,3 +1,5 @@
+import 'package:payme/pages/menu/menu_page.dart';
+
 import '../../database/users_database.dart';
 import '../../models/user_model.dart';
 import '../../services/io_service.dart';
@@ -23,7 +25,7 @@ class SignUp {
       print(isSuccess
           ? "Foydalanuvchi muvaffaqiyatli qo'shildi"
           : "Ma'lumotlarda xatolik bor...");
-      //TODO: Menu() ga o'tish
+      Menu(db.readData(phoneNumber));
     }
   }
 }

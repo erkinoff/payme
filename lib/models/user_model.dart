@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:payme/pages/menu/menu_page.dart';
+
 import '../services/io_service.dart';
 import 'card_model.dart';
 
@@ -26,11 +28,11 @@ class User {
         cards.add(card);
       } catch (e) {
         String command = io.inputTextImportant("1. Qayta urinish\n"
-            "2. Ortga\n"
-            "0. Chiqish\n");
+            "2. Menyuga qaytish\n"
+            "0. Ortga\n");
         switch (command) {
           case "2":
-            //TODO: Ortga qaytish class
+            Menu(this);
             break;
           case "0":
             return;
@@ -104,34 +106,4 @@ class User {
 
   factory User.fromJson(String source) =>
       User.fromMap(json.decode(source) as Map<String, Object?>);
-}
-
-///Kodlar ishlayotganini tekshirish
-void main(List<String> args) {
-  User user = User(phoneNumber: 1, password: "1");
-  user.addCard(
-    Card(
-        name: "Humo",
-        cardNumber: 9860600433223457,
-        validityYear: 27,
-        validityMonth: 08,
-        registeredPhoneNumber: 993041155),
-  );
-  user.addCard(
-    Card(
-        name: "UzCard",
-        cardNumber: 8600123412341234,
-        validityYear: 27,
-        validityMonth: 08,
-        registeredPhoneNumber: 993051155),
-  );
-  user.readAllCards();
-  String text = io.inputText("Kalit so'z: ");
-  var founded = user.searchCard(text);
-  for (var card in founded) {
-    print(card);
-  }
-  String cardName = io.inputText("Karta nomi: ");
-  Card? myCard = user.readCard(cardName);
-  print(myCard?.toMap());
 }
